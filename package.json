@@ -1,0 +1,46 @@
+{
+  "name": "vue-event",
+  "version": "1.0.0",
+  "description": "vue-event",
+  "main": "dist/vue-bus.common.js",
+  "module": "dist/vue-bus.esm.js",
+  "unpkg": "dist/vue-bus.js",
+  "jsdelivr": "dist/vue-bus.js",
+  "files": [
+    "src",
+    "dist/*.js"
+  ],
+  "scripts": {
+    "test": "jest",
+    "build": "rimraf ./dist && rollup -c ./rollup.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peter-moon/vue-event.git"
+  },
+  "keywords": [
+    "vue",
+    "event",
+    "bus"
+  ],
+  "author": "peter.moon",
+  "license": "MIT",
+  "homepage": "https://github.com/peter-moon/vue-event",
+  "devDependencies": {
+    "@babel/preset-env": "7.6.0",
+    "jest": "24.9.0",
+    "pretty-format": "24.9.0",
+    "rimraf": "3.0.0",
+    "rollup": "1.21.2",
+    "rollup-plugin-babel": "4.3.3",
+    "rollup-plugin-babel-minify": "9.0.0",
+    "vue": "2.6.10"
+  },
+  "dependencies": {
+    "flux-standard-action": "2.1.1"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
+  }
+}
