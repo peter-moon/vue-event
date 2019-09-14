@@ -130,20 +130,13 @@ describe('Vue.$event on this', () => {
         expect(vueModel.letter).toBe('aaa');
     });
 
-    test('clear remove store', () => {
-        expect(vueModel.show().eventTypes.length).toBe(3);
-
+    test('clear remove store and off event', () => {
         vueModel.clear();
 
+        vueModel.emit();
+        
+        expect(vueModel.count).toBe(0)
+        expect(vueModel.letter).toBe('');
         expect(vueModel.show().eventTypes.length).toBe(0);
-
-        vueModel.on(eventConsumer({
-            type: 'FSA_TRIPLE',
-            consume: ({ error, payload, meta }) => {
-                this.count = this.count * 3;
-            }
-        }));
-
-        expect(vueModel.show().eventTypes.length).toBe(1);
     });
 });

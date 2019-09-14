@@ -179,19 +179,21 @@ describe('Vue.$event on Vue', () => {
     });
 
     test('clear remove store', () => {
-        expect(Vue.$event.show().eventTypes.length).toBe(3);
-
         Vue.$event.clear();
 
-        expect(Vue.$event.show().eventTypes.length).toBe(0);
-
-        Vue.$event.on(eventConsumer({
-            type: 'FSA_TRIPLE',
-            consume: ({ error, payload, meta }) => {
-                this.count = this.count * 3;
+        Vue.$event.emit(produceEvent({
+            type: 'FSA_ADD',
+            payload: {
+                add: 1
+            },
+            error: null,
+            meta: {
+                letter: 'aaa'
             }
         }));
 
-        expect(Vue.$event.show().eventTypes.length).toBe(1);
+        expect(vueModel.count).toBe(0)
+        expect(vueModel.letter).toBe('');
+        expect(Vue.$event.show().eventTypes.length).toBe(0);
     });
 });

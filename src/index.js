@@ -9,12 +9,11 @@ VueEvent.install = (Vue, options) => {
     const { type, consume } = eventConsumer;
 
     if(!type || !consume) {
-      console.warn('NEEDS TYPE, CONSUME');
-      return;
+      throw new Error('NEEDS TYPE, CONSUME');
     }
 
     if(!findEventByType({ type })){
-      registEventConsumer(eventConsumer);  
+      registEventConsumer(eventConsumer);
     }
     
     this.$on.bind(this)(type, consume);
@@ -24,8 +23,7 @@ VueEvent.install = (Vue, options) => {
     const { type, consume } = eventConsumer;
 
     if(!type || !consume) {
-      console.warn('NEEDS TYPE, CONSUME');
-      return;
+      throw new Error('NEEDS TYPE, CONSUME');
     }
 
     if(!findEventByType({ type })){
@@ -59,7 +57,14 @@ VueEvent.install = (Vue, options) => {
   }
 
   $event.clear = function(){
-    return clearEventStoreAll();
+    const { eventTypes } = this.show();
+    
+    // event off registered event type
+    for(const type of eventTypes){
+      this.off({ type });
+    }
+
+    clearEventStoreAll();
   }
 
   $event.find = function({ type }){
